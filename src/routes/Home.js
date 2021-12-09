@@ -22,7 +22,7 @@ const Home = ({ userObj }) => {
       const nweetObjArray = snapshot.docs.map(
         doc => ({ id: doc.id, ...doc.data() })
       );
-      nweetObjArray.sort((a,b)=>(b.createdAt - a.createdAt));
+      nweetObjArray.sort((a, b) => (b.createdAt - a.createdAt));
       setNweets(nweetObjArray);
     });
   }, [])
@@ -31,12 +31,12 @@ const Home = ({ userObj }) => {
     event.preventDefault();
     let attachmentUrl = "";
     try {
-      if(attachment !== ""){   
+      if (attachment !== "") {
         const uploadResult = await uploadString(
           ref(storageService, `${userObj.uid}/${uuidv4()}`),
           attachment,
           "data_url");
-          attachmentUrl = await getDownloadURL(uploadResult.ref);
+        attachmentUrl = await getDownloadURL(uploadResult.ref);
       }
       if (nweet !== "") {
         await addDoc(collection(dbService, "nweets"), {

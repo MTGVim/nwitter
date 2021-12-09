@@ -52,16 +52,16 @@ const Auth = () => {
       target: { name },
     } = event;
     let provider;
-    if(name === "google") {
+    if (name === "google") {
       provider = new GoogleAuthProvider();
-    } else if (name === "github"){
+    } else if (name === "github") {
       provider = new GithubAuthProvider();
     }
-    try{
-      const data = await signInWithPopup(authService,provider);
+    try {
+      const data = await signInWithPopup(authService, provider);
       console.log(data);
     } catch (error) {
-      if(error.code !== "auth/popup-closed-by-user"){
+      if (error.code !== "auth/popup-closed-by-user") {
         setError(error.message);
       }
     }

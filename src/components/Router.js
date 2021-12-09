@@ -14,7 +14,7 @@ const AppRouter = ({ userObj, refreshUser }) => {
           <Route path="/" element={<Home userObj={userObj} />} />
           <Route path="/profile" element={
             <Profile userObj={userObj} refreshUser={refreshUser} />
-            }
+          }
           />
         </>
       ) : (

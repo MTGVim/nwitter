@@ -22,7 +22,7 @@ const Profile = ({ userObj, refreshUser }) => {
       orderBy("createdAt", "desc"));
     const nweets = await getDocs(stmt);
     const data = [];
-    nweets.forEach((doc)=>data.push({ id: doc.id, ...doc.data()}));
+    nweets.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
     setMyNweets(data);
   };
   useEffect(() => {
@@ -35,7 +35,7 @@ const Profile = ({ userObj, refreshUser }) => {
   }
   const onSubmit = async (event) => {
     event.preventDefault();
-    if(userObj.displayName !== newDisplayName){
+    if (userObj.displayName !== newDisplayName) {
       try {
         // #1. React의 setState 함수를 통하지 않고, userObj가 참조중인 값을 변경해버림
         await updateProfile(authService.currentUser, { displayName: newDisplayName });

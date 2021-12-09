@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { dbService,
+import {
+  dbService,
   doc,
   deleteDoc,
   updateDoc,
@@ -19,7 +20,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       // delete
       try {
         await deleteDoc(doc(dbService, `nweets/${nweetObj.id}`));
-        if(nweetObj.attachmentUrl){
+        if (nweetObj.attachmentUrl) {
           await deleteObject(ref(storageService, nweetObj.attachmentUrl))
         }
       }
@@ -32,7 +33,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     // update
-    await updateDoc(doc(dbService, `nweets/${nweetObj.id}`),{
+    await updateDoc(doc(dbService, `nweets/${nweetObj.id}`), {
       text: newNweet
     });
     setEditing(false);
@@ -49,14 +50,14 @@ const Nweet = ({ nweetObj, isOwner }) => {
     {editing ? (
       isOwner && <>
         <form onSubmit={onSubmit}>
-          <input 
+          <input
             type="text"
             placeholder="Edit your Nweet"
-            value={newNweet} 
+            value={newNweet}
             required
             onChange={onChange}
           />
-          <input type="submit" value="Update Nweet"/>
+          <input type="submit" value="Update Nweet" />
         </form>
         <button onClick={toggleEditing}>Cancel</button>
       </>

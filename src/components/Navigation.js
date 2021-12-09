@@ -12,7 +12,7 @@ const Navigation = ({ userObj }) => {
           ) : ("Profile"
           )
         }</>
-        </Link></li>
+      </Link></li>
     </ul>
   </nav>;
 }

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { authService } from "fbase";
 import AppRouter from "components/Router";
@@ -9,7 +8,7 @@ function App() {
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         setUserObj({
           ...user
         });
@@ -20,11 +19,11 @@ function App() {
     });
   }, [])
   function refreshUser() {
-    setUserObj({...authService.currentUser});
+    setUserObj({ ...authService.currentUser });
   };
   return (
     <>
-      {init ? <AppRouter userObj={userObj} refreshUser={refreshUser} />: "Initializing..."}
+      {init ? <AppRouter userObj={userObj} refreshUser={refreshUser} /> : "Initializing..."}
       {/* <footer>&copy; {new Date().getFullYear()} Nwitter </footer> */}
     </>
   );
