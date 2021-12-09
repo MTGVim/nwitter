@@ -1,7 +1,16 @@
 import Nweet from 'components/Nweet';
-import { dbService, collection, addDoc } from 'fbase';
-import { onSnapshot } from 'firebase/firestore';
+import {
+  dbService,
+  collection,
+  addDoc,
+  storageService,
+  onSnapshot,
+  ref,
+  uploadString,
+  getDownloadURL
+} from 'fbase';
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -19,18 +28,26 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    let attachmentUrl = "";
     try {
-      const docRef = await addDoc(collection(dbService, "nweets"), {
+      if(attachment){   
+        const uploadResult = await uploadString(
+          ref(storageService, `${userObj.uid}/${uuidv4()}`),
+          attachment,
+          "data_url");
+          attachmentUrl = await getDownloadURL(uploadResult.ref);
+      }
+      await addDoc(collection(dbService, "nweets"), {
         text: nweet,
         createdAt: Date.now(),
         creatorId: userObj.uid,
+        attachmentUrl,
       });
-      console.log("Document written with ID: ", docRef.id);
-      console.log("Document written by: ", userObj.uid);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
     setNweet("");
+    setAttachment(null);
   }
   const onChange = (event) => {
     const {
@@ -48,7 +65,7 @@ const Home = ({ userObj }) => {
     };
     reader.readAsDataURL(theFile);
   }
-  const onClearAttachment = () => setAttachment(null);
+  const onClearAttachment = () => setAttachment("");
   return (<div>
     <form onSubmit={onSubmit}>
       <input
@@ -58,11 +75,11 @@ const Home = ({ userObj }) => {
         placeholder="What's on your mind?"
         maxLength={120}
       />
-      <input type="file" accept="image/*" onChange={onFileChange}/>
+      <input type="file" accept="image/*" onChange={onFileChange} />
       <input type="submit" value="Nweet" />
       {attachment && (
         <div>
-          <img src={attachment} width="50px" height="50px" alt={"staged one for attachment"}/>
+          <img src={attachment} width="50px" height="50px" alt={"staged one for attachment"} />
           <button onClick={onClearAttachment}>Clear</button>
         </div>
       )}
