@@ -22,6 +22,7 @@ const Home = ({ userObj }) => {
       const nweetObjArray = snapshot.docs.map(
         doc => ({ id: doc.id, ...doc.data() })
       );
+      nweetObjArray.sort((a,b)=>(b.createdAt - a.createdAt));
       setNweets(nweetObjArray);
     });
   }, [])
@@ -37,17 +38,19 @@ const Home = ({ userObj }) => {
           "data_url");
           attachmentUrl = await getDownloadURL(uploadResult.ref);
       }
-      await addDoc(collection(dbService, "nweets"), {
-        text: nweet,
-        createdAt: Date.now(),
-        creatorId: userObj.uid,
-        attachmentUrl,
-      });
+      if (nweet !== "") {
+        await addDoc(collection(dbService, "nweets"), {
+          text: nweet,
+          createdAt: Date.now(),
+          creatorId: userObj.uid,
+          attachmentUrl,
+        });
+      }
     } catch (error) {
       console.error("Error adding document: ", error);
     }
     setNweet("");
-    setAttachment(null);
+    setAttachment("");
   }
   const onChange = (event) => {
     const {

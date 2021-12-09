@@ -9,10 +9,9 @@ import {
   orderBy,
   updateProfile
 } from 'fbase';
-import Nweet from 'components/Nweet';
 
-const Profile = ({ userObj, refreshDisplayName }) => {
-  const [newDisplayName, setNewDisplayName] = useState("");
+const Profile = ({ userObj, refreshUser }) => {
+  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [myNweets, setMyNweets] = useState([]);
   const onLogoutClick = () => {
     authService.signOut();
@@ -38,11 +37,13 @@ const Profile = ({ userObj, refreshDisplayName }) => {
     event.preventDefault();
     if(userObj.displayName !== newDisplayName){
       try {
-        await updateProfile(userObj, { displayName: newDisplayName });
+        // #1. React의 setState 함수를 통하지 않고, userObj가 참조중인 값을 변경해버림
+        await updateProfile(authService.currentUser, { displayName: newDisplayName });
       } catch (err) {
         console.error("Error updating Profile: ", err);
       }
-      refreshDisplayName();
+      // 위의 #1.로 인해 리렌더가 되지 않는 상태가 되므로, state를 강제로 갈아낌 (pojo라서 안전)
+      refreshUser();
     }
   }
 
@@ -54,7 +55,7 @@ const Profile = ({ userObj, refreshDisplayName }) => {
     <button onClick={onLogoutClick}>Log Out</button>
     <div>
       {myNweets.map((nweetObj) => {
-        return <Nweet key={nweetObj.id} nweetObj={nweetObj} isOwner={nweetObj.creatorId === userObj.uid} />;
+        return <div>{nweetObj.text}</div>;
       })}
     </div>
   </>;

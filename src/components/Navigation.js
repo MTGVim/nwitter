@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({ displayName }) => {
-  console.log(displayName);
+const Navigation = ({ userObj }) => {
+  console.log(userObj.displayName);
   return <nav>
     <ul>
       <li><Link to="/">Home</Link></li>
       <li><Link to="/profile">
-        <>{displayName !== null ?
-          (`${displayName}'s Profile`
+        <>{userObj.displayName !== null ?
+          (`${userObj.displayName}'s Profile`
           ) : ("Profile"
           )
         }</>

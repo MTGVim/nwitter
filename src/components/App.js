@@ -6,25 +6,25 @@ import AppRouter from "components/Router";
 function App() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if(user){
-        setUserObj(user);
-        setDisplayName(user.displayName);
+        setUserObj({
+          ...user
+        });
       } else {
         setUserObj(null);
       }
       setInit(true);
     });
   }, [])
-  function refreshDisplayName() {
-    setDisplayName(userObj.displayName);
+  function refreshUser() {
+    setUserObj({...authService.currentUser});
   };
   return (
     <>
-      {init ? <AppRouter userObj={userObj} refreshDisplayName={refreshDisplayName} />: "Initializing..."}
+      {init ? <AppRouter userObj={userObj} refreshUser={refreshUser} />: "Initializing..."}
       {/* <footer>&copy; {new Date().getFullYear()} Nwitter </footer> */}
     </>
   );
