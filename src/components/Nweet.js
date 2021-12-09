@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
 const Nweet = ({ nweetObj, isOwner }) => {
