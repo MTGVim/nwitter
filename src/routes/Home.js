@@ -15,7 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState(null);
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     onSnapshot(collection(dbService, "nweets"), (snapshot) => {
@@ -30,7 +30,7 @@ const Home = ({ userObj }) => {
     event.preventDefault();
     let attachmentUrl = "";
     try {
-      if(attachment){   
+      if(attachment !== ""){   
         const uploadResult = await uploadString(
           ref(storageService, `${userObj.uid}/${uuidv4()}`),
           attachment,
