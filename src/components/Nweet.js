@@ -38,7 +38,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
   };
   return <div>
     {editing ? (
-      <>
+      isOwner && <>
         <form onSubmit={onSubmit}>
           <input 
             type="text"
