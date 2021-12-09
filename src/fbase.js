@@ -3,32 +3,6 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
-export {
-  ref,
-  uploadString,
-  getDownloadURL,
-  deleteObject
-} from 'firebase/storage';
-
-export {
-  collection,
-  doc,
-  addDoc,
-  getDocs,
-  onSnapshot,
-  deleteDoc,
-  updateDoc
-} from "firebase/firestore";
-
-export {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  GithubAuthProvider
-} from "firebase/auth";
-
-
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -43,3 +17,33 @@ initializeApp(firebaseConfig);
 export const authService = getAuth();
 export const dbService = getFirestore();
 export const storageService = getStorage();
+
+export {
+  ref,
+  uploadString,
+  getDownloadURL,
+  deleteObject
+} from 'firebase/storage';
+
+export {
+  collection,
+  doc,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  deleteDoc,
+  updateDoc,
+  query,
+  where,
+  orderBy
+} from "firebase/firestore";
+
+export {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  updateProfile,
+} from "firebase/auth";
+

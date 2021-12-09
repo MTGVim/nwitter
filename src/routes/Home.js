@@ -1,4 +1,4 @@
-import Nweet from 'components/Nweet';
+import React, { useEffect, useState } from 'react';
 import {
   dbService,
   collection,
@@ -9,8 +9,8 @@ import {
   uploadString,
   getDownloadURL
 } from 'fbase';
-import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Nweet from 'components/Nweet';
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
