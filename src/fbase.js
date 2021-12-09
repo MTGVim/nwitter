@@ -4,8 +4,14 @@ import { getAuth } from "firebase/auth";
 
 export {
   collection,
-  addDoc
+  doc,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  deleteDoc,
+  updateDoc
 } from "firebase/firestore";
+
 export {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
