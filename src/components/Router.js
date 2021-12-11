@@ -11,11 +11,30 @@ const AppRouter = ({ userObj, refreshUser }) => {
     <Routes>
       {userObj ? (
         <>
-          <Route path="/" element={<Home userObj={userObj} />} />
+          <Route path="/" element={
+            <div style={{
+              maxWidth: 890,
+              width: "100%",
+              margin: "0 auto",
+              marginTop: 80,
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <Home userObj={userObj} />
+            </div>
+          } />
           <Route path="/profile" element={
-            <Profile userObj={userObj} refreshUser={refreshUser} />
-          }
-          />
+            <div style={{
+              maxWidth: 890,
+              width: "100%",
+              margin: "0 auto",
+              marginTop: 80,
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <Profile userObj={userObj} refreshUser={refreshUser} />
+            </div>
+          } />
         </>
       ) : (
         <Route path="/" element={<Auth />} />
@@ -23,7 +42,7 @@ const AppRouter = ({ userObj, refreshUser }) => {
       }
       <Route path="*" element={<Navigate to="/"></Navigate>} />
     </Routes>
-  </Router>
+  </Router >
 }
 
 export default AppRouter;
