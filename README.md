@@ -1,6 +1,6 @@
 # nwitter
 리액트 기반의 트위터 클론앱
-
+https://mtgvim.github.io/movie_app_2021/
 ## 주요기능
 * 회원가입/로그인/로그아웃, 메시지 CRUD, 이미지 업로드 기능
 
