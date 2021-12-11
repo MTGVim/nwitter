@@ -1,5 +1,5 @@
 # nwitter
-<img src='nwitter.png' width="400px" height="300px"/>
+<img src='nwitter.png' width="400px"/>
 리액트 기반의 트위터 클론앱
 * https://mtgvim.github.io/nwitter/
 ## 주요기능
